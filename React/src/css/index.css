@@ -1,0 +1,289 @@
+header {
+  background-color: #0e3b40;
+  align-items: center; 
+  height: 110px;
+  padding: 15px 0px;
+
+  background-image: url('https://i.pinimg.com/564x/dd/03/35/dd0335440224ed50a35045cd3aaf29b2.jpg');
+  background-size: cover;
+  background-position: center;
+  
+}
+
+header h1 {
+  margin: 0px;
+  color: #ffffff;
+  padding: 0;
+  font-size: 30px;
+}
+
+header h2 {
+  margin: 0px, 2px;
+  color: #fff;
+  font-style: italic;
+  font-weight: normal;
+  text-align: center; 
+}
+
+header .text_container{
+  display: block;
+  justify-content: left;
+  align-items: left;
+}
+
+header .upper_container{
+  display: flex;
+  justify-content: left;
+  align-items: left;
+  flex-direction: row;
+  margin-left: 650px;
+
+}
+
+/* Set the nav component just at the end of header*/
+header nav {
+  width: 100%;
+  height: 25%;
+  background-color: hsl(211, 100%, 10%);
+  overflow: hidden;
+  margin: 0px; /* Cambiado a posición absoluta */
+}
+
+/* Create specifications for SearcBar component */
+header .searchbar {
+  display: flex;
+  align-items: center; /* Align items vertically */
+  margin-top: 50px;
+  margin-left: 300px;
+}
+
+header .searchbar input[type="text"] {
+  padding: 12px; /* Increased padding */
+  border: none;
+  border-radius: 20px; /* Rounded border */
+  background-color: #f2f2f2; /* Light gray background */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Added box shadow */
+  font-size: 12px; /* Increased font size */
+  transition: background-color 0.3s ease;
+}
+
+header .searchbar input[type="text"]::placeholder {
+  color: #999; /* Placeholder text color */
+}
+
+header .searchbar input[type="text"]:focus {
+  background-color: #fff; /* Change background color on focus */
+}
+
+header .searchbar button {
+  background-color: #02172c;
+  color: #fff;
+  padding: 12px 20px; /* Increased padding */
+  border: none;
+  border-radius: 20px; /* Rounded border */
+  margin-left: 10px; /* Added margin between input and button */
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+header .searchbar button:hover {
+  background-color: #47869c;
+}
+
+
+/* Create specifications for NavBar component */
+
+nav ul {
+  /* list-style-type: none; */
+  padding: 0;
+  margin: 5px;
+}
+
+nav ul li {
+  display: inline;
+  margin-right: 10px;
+}
+
+nav ul li a {
+  color: #fff;
+  text-decoration: none;
+  padding: 15px;
+  font-size: 13px;
+}
+
+nav ul li a:hover { 
+  color: #091529;
+  background-color: #979ca8;
+}
+
+
+/* Create specifications for contact info form */
+
+.contact-form {
+  margin-top: 20px;
+  margin-left: 150px;
+  padding: 10px 20px;
+  max-width: 70%;
+  background-color: #b5b5b5;
+  color: #fff;
+
+  border: 1px solid #02172c;
+  border-radius: 20px;
+
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  align-items: center;
+}
+
+
+
+footer {
+  background-color: #02172c;
+  color: #fff;
+  text-align: center;
+  padding: 10px 0;
+  width: 100%;
+  bottom: 0;
+}
+
+footer p {
+  margin: 0;
+}
+
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #273551;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+
+  max-width: 80%;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+  text-align: center;
+}
+
+.content {
+  display: flex;
+}
+
+.film-details {
+  display: flex;
+  margin-top: 20px;
+  margin-left: 20px;
+  padding: 10px;
+}
+
+.film-list{
+  display: flex;
+  flex-direction: column;
+  gap: 20px; /* Espacio entre cada película */
+}
+
+.filters {
+  width: 500px; /* Ancho de la columna lateral */
+  padding: 20px;
+  background-color: #f4f4f4;
+}
+
+.filters h3 {
+  margin-top: 0;
+}
+
+.filters label {
+  display: block;
+  margin-bottom: 5px;
+  padding-top: 10px;
+  font-weight: bold;
+}
+
+.genre-dropdown {
+  position: 'absolute';
+  top: '100%';
+  left: 0;  
+  z-index: 1;
+  background-color: '#fff';
+  border: '1px solid #ccc';
+  border-radius: '4px';
+  box-shadow: '0 2px 4px rgba(0,0,0,0.1)';
+  padding: '5px';
+  max-height: '150px';
+  overflow-y: 'auto';
+  min-width: '150px' }
+
+
+img {
+  width: 200px;
+  height: auto;
+  margin-right: 20px;
+  border-radius: 5px;
+}
+
+.info {
+  flex: 1;
+}
+
+p {
+  margin: 5px 0;
+}
+
+.form-control {
+  margin-bottom: 15px;
+}
+
+.form-control label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.form-control input[type="text"],
+.form-control input[type="email"] {
+  width: calc(100% - 16px);
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
+.form-control textarea {
+  width: calc(100% - 16px);
+  height: 100px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
+button[type="submit"] {
+  background-color: #333;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+button[type="submit"]:hover {
+  background-color: #777;
+}
+
+.buttons {
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+  padding: 20px;
+}
+
+.buttons input[type="number"] {
+  width: 35px 
+}
+
+

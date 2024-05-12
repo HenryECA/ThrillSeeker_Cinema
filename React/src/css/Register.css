@@ -1,0 +1,37 @@
+.form-control {
+    margin-bottom: 15px;
+  }
+  
+  .form-control label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+  
+
+    .form-control input[type="text"],
+  .form-control input[type="password"],
+  .form-control input[type="email"] {
+    width: calc(100% - 16px);
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+  }
+  
+  .form-control textarea {
+    width: calc(100% - 16px);
+    height: 100px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+  }
+
+  .error {
+    border: 1px solid red; /* Set border color to red */
+}
+
+.ErrorMessage {
+    color: red;
+    font-size: 12px;
+    margin-top: 5px;
+}
