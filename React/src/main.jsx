@@ -19,6 +19,8 @@ import RatingPage from './RatingPage.jsx'
 import BestLastYearPage from './BestLastYearPage.jsx'
 import LogInPage from './LogInPage.jsx'
 import RegistrationPage from './RegistrationPage.jsx'
+import ProfilePage from './ProfilePage.jsx'
+
 import './css/index.css'
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
@@ -52,6 +54,11 @@ const router = createBrowserRouter([{
     path: "registration",
     element: <RegistrationPage/>,
   },
+
+  // {
+  //   path: "profile",
+  //   element: <ProfilePage/>,
+  // },
 
 
 ],
