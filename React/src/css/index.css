@@ -1,0 +1,276 @@
+/* HEADER */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+
+
+header {
+  background-color: #0e3b40;
+  align-items: center; 
+  height: 120px;
+  padding: 15px 0px;
+  
+  font-family: 'Montserrat', sans-serif;
+
+  background-image: url('https://i.pinimg.com/564x/dd/03/35/dd0335440224ed50a35045cd3aaf29b2.jpg');
+  background-size: cover;
+  background-position: center;
+  
+}
+
+header h1 {
+  margin: 0px;
+  color: #ffffff;
+  padding: 0;
+  font-size: 30px;
+}
+
+header h2 {
+  margin: 0px, 2px;
+  color: #fff;
+  font-style: italic;
+  font-weight: normal;
+  text-align: center; 
+}
+
+header .text_container{
+  display: block;
+  justify-content: left;
+  align-items: left;
+}
+
+header .upper_container{
+  display: flex;
+  justify-content: left;
+  align-items: left;
+  flex-direction: row;
+  margin-left: 600px;
+
+}
+
+/* Set the nav component just at the end of header*/
+header nav {
+  width: 100%;
+  height: 25%;
+  background-color: hsl(211, 100%, 10%);
+  overflow: hidden;
+  margin: 0px; /* Cambiado a posición absoluta */
+}
+
+/* Create specifications for SearcBar component */
+header .searchbar {
+  display: flex;
+  align-items: center; /* Align items vertically */
+  margin-top: 50px;
+  margin-left: 250px;
+}
+
+header .searchbar input[type="text"] {
+  padding: 12px; /* Increased padding */
+  border: none;
+  border-radius: 20px; /* Rounded border */
+  background-color: #f2f2f2; /* Light gray background */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Added box shadow */
+  font-size: 12px; /* Increased font size */
+  transition: background-color 0.3s ease;
+}
+
+header .searchbar input[type="text"]::placeholder {
+  color: #999; /* Placeholder text color */
+}
+
+header .searchbar input[type="text"]:focus {
+  background-color: #fff; /* Change background color on focus */
+}
+
+header .searchbar button {
+  background-color: #02172c;
+  color: #fff;
+  padding: 12px 20px; /* Increased padding */
+  border: none;
+  border-radius: 20px; /* Rounded border */
+  margin-left: 10px; /* Added margin between input and button */
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+header .searchbar button:hover {
+  background-color: #47869c;
+}
+
+
+/* NAV */
+
+nav ul {
+  /* list-style-type: none; */
+  padding: 0;
+  margin: 5px;
+}
+
+nav ul li {
+  display: inline;
+  margin-right: 10px;
+}
+
+nav ul li a {
+  color: #fff;
+  text-decoration: none;
+  padding: 15px;
+  font-size: 13px;
+}
+
+nav ul li a:hover { 
+  color: #091529;
+  background-color: #979ca8;
+}
+
+nav ul li a.active {
+  color: #091529;
+  /* Set to bold */
+  font-weight: bold;
+  background-color: #979ca8;
+}
+
+/* Especifications for nav login and register */
+nav {
+  display: flex;
+  justify-content: space-between; /* Distribuye los elementos a los extremos */
+  align-items: center; /* Alinea verticalmente los elementos al centro */
+}
+
+.left {
+  display: flex;
+  justify-content: flex-start; /* Alinea los elementos a la izquierda */
+  list-style-type: none; /* Elimina viñetas de la lista */
+  padding: 0; /* Elimina el relleno predeterminado de la lista */
+}
+
+.right {
+  display: flex;
+  justify-content: flex-end; /* Alinea los elementos a la derecha */
+  list-style-type: none; /* Elimina viñetas de la lista */
+  padding: 0; /* Elimina el relleno predeterminado de la lista */
+}
+
+/* FOOTER */
+
+footer {
+  background-color: #02172c;
+  color: #fff;
+  text-align: center;
+  padding: 10px 0;
+  width: 100%;
+  bottom: 0;
+}
+
+footer p {
+  margin: 0;
+}
+
+/* BODY */
+
+body {
+  
+  font-family: 'Montserrat', sans-serif;
+  background-color: #273551;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+
+  /* Ordenamos en columnas */
+  /* display: flex; */
+  max-width: 95%;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 0.2px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.container :left {
+  background-color: black;
+}
+
+
+h1 {
+  text-align: center;
+}
+
+.content {
+  display: flex;
+}
+
+img {
+  width: 200px;
+  height: auto;
+  margin-right: 20px;
+  border-radius: 5px;
+}
+
+.info {
+  flex: 1;
+}
+
+p {
+  margin: 5px 0;
+}
+
+
+/* FORMS */
+
+.form-control {
+  margin-bottom: 15px;
+}
+
+.form-control label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.form-control input[type="text"],
+.form-control input[type="email"] {
+  width: calc(100% - 16px);
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
+.form-control textarea {
+  width: calc(100% - 16px);
+  height: 100px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
+
+/* BUTTONS */
+
+
+button[type="submit"] {
+  background-color: #333;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+button[type="submit"]:hover {
+  background-color: #777;
+}
+
+.buttons {
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+  padding: 20px;
+}
+
+.buttons input[type="number"] {
+  width: 35px 
+}
+
+

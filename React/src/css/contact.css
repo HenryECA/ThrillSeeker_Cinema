@@ -1,0 +1,17 @@
+/* CONTACT FORM */
+
+.contact-form {
+    margin-top: 20px;
+    margin-left: 150px;
+    padding: 10px 20px;
+    max-width: 70%;
+    background-color: #b5b5b5;
+    color: #fff;
+  
+    /* border: 1px solid #02172c; */
+    /* border-radius: 20px; */
+  
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    align-items: center;
+  }
+  
