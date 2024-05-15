@@ -42,6 +42,10 @@ padding-top: 10px;
 font-weight: bold;
 }
 
+.range-filters{
+  align-items: center;
+}
+
 .genre-dropdown {
 position: 'absolute';
 top: '100%';
@@ -56,4 +60,25 @@ max-height: '150px';
 overflow-y: 'auto';
 min-width: '150px' }
   
+
+.filters .apply-filters{
+  background-color: #dbdada;
+  /* centrado */
+  width: 75%;
+  display: block;
+  margin: 20px auto;
+  color: #131c38;
+  font-weight: bold;
+  font-size: 15px;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.filters .apply-filters:hover{
+  background-color: #787878;
+  color: #ffffff;
+
+}
   

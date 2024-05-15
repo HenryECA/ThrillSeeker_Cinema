@@ -1,0 +1,17 @@
+.searcher{
+    display: flex;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-weight: bold;
+    font-size: 20px;
+    align-items: center;
+}
+
+.searcher select{
+    /* width: 20%; */
+    height: 30px;
+    font-size: 15px;
+    padding: 5px;
+    margin: 5px;
+    background-color: #dbdbdb;
+}

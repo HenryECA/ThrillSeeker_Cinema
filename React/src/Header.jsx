@@ -6,6 +6,8 @@ import { RetrieveData } from './utils';
 
 
 export default function Header() {
+
+  let YEAR = new Date().getFullYear();
   let [userData, error] = RetrieveData();
 
   console.log(userData.username);
@@ -54,7 +56,7 @@ export default function Header() {
               <NavLink to="/ratingPage">Rating</NavLink>
           </li>
           <li>
-              <NavLink to="/lastYearPage">Best of 2023</NavLink>
+              <NavLink to="/bestYearPage">Year's Top 10</NavLink>
           </li>
           <li>
               <NavLink to="/contactInfo">Contact Us</NavLink>

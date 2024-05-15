@@ -16,7 +16,7 @@ import App from './App.jsx'
 import ListPage from './ListPage.jsx'
 import ContactInfo from './ContactInfo.jsx'
 import RatingPage from './RatingPage.jsx'
-import BestLastYearPage from './BestLastYearPage.jsx'
+import BestPerYearPage from './BestPerYearPage.jsx'
 import LogInPage from './LogInPage.jsx'
 import RegistrationPage from './RegistrationPage.jsx'
 import ProfilePage from './ProfilePage.jsx'
@@ -40,8 +40,8 @@ const router = createBrowserRouter([{
     element: <RatingPage/>,
   },
   {
-    path: "lastYearPage",
-    element: <BestLastYearPage/>,
+    path: "bestYearPage",
+    element: <BestPerYearPage/>,
   },
 
   // Meter elementos de login de Enrique
