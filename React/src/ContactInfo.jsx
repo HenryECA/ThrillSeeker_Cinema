@@ -38,7 +38,13 @@ function SideComponent() {
   </div>
 );
 }
+
 export default function ContactInfo() {
+
+  function sendForm() {
+    alert("Your message has been sent successfully! We will get back to you as soon as possible.");
+  }
+
   return (
     <div className="contact-container">
 
@@ -67,7 +73,7 @@ export default function ContactInfo() {
 
         <p>Fill out the form below to send us a message and we will get back to you as soon as possible!</p>
 
-        <form action="" method="post">
+        <form>
           <div className="form-control">
             <label htmlFor="name">Name</label>
             <input type="text" id="name" placeholder="Name" required="" />
@@ -84,7 +90,8 @@ export default function ContactInfo() {
             <label htmlFor="message">Message</label>
             <textarea name="message" placeholder="Message" defaultValue={""} />
           </div>
-          <button type="submit">Send</button>
+          <button type="submit"  onClick={() => sendForm()}>Send</button>
+          
         </form>
         </div>
       </div>
