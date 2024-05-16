@@ -1,13 +1,17 @@
+
 // Import searchbar
 import SearchBar from './SearchBar.jsx';
 import { NavLink } from "react-router-dom";
 import { RetrieveData } from './utils';
 
+
 export default function Header() {
+
+  let YEAR = new Date().getFullYear();
   let [userData, error] = RetrieveData();
 
-  console.log(userData.username);
-  console.log(error);
+  // console.log(userData.username);
+  // console.log(error);
 
   //error = false;
 
@@ -17,15 +21,18 @@ export default function Header() {
       const logoutPath = "http://127.0.0.1:8000/api/users/logout/"
 
       fetch(logoutPath, {
-        method: 'POST',
+        method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
-        }
+        },
+        credentials: 'include',
       })
       .then((response) => {
         if (!response.ok) {
           console.error('Error:', response);
         }
+
+        window.location.reload();
       })
       .catch((error) => {
         console.error('Error:', error);
@@ -36,45 +43,61 @@ export default function Header() {
 
   return (
     <header>
-      <div className="upper_container">
-        <div className="text_container">
+
+      <div class="upper_container">
+        <div class="text_container">
           <h1>ThrillSeeker Cinema</h1>
           <h2>Lights, camera, action!</h2>
         </div>
-        <SearchBar />
       </div>
 
       <nav>
-        <ul className="nav-links">
+          <ul className='left'>
           <li>
-            <NavLink to="/">Inventory</NavLink>
+              <NavLink to="/">Movie Guide</NavLink>
           </li>
           <li>
-            <NavLink to="/contactInfo">Contact Us</NavLink>
+              <NavLink to="/ratingPage">Ranking</NavLink>
           </li>
-          <div className="right-nav-links">
-            {!error ? (
+          <li>
+              <NavLink to="/bestYearPage">Year's Top 10</NavLink>
+          </li>
+          <li>
+              <NavLink to="/contactInfo">Contact Us</NavLink>
+          </li>
+          </ul>
+
+          <ul className='right'>
+
+          {!error ? (
               <>
+                {userData.admin === true && (
+                  <li>
+                    <NavLink to="/admin">Admin</NavLink>
+                  </li>
+                )}
                 <li>
                   <NavLink to="/profile">Profile</NavLink>
                 </li>
                 <li>
-                  <button onClick={handleLogout}>Logout</button>
+                  <NavLink onClick={handleLogout}>Logout</NavLink>
                 </li>
               </>
             ) : (
               <>
                 <li>
-                  <NavLink to="/register">Register</NavLink>
+                  <NavLink to="/registration">Register</NavLink>
                 </li>
                 <li>
                   <NavLink to="/login">Login</NavLink>
                 </li>
               </>
-            )}
-          </div>
-        </ul>
+          )}
+          </ul>
+          
       </nav>
+    
+
     </header>
   );
 }

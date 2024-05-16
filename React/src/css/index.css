@@ -1,8 +1,14 @@
+/* HEADER */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+
+
 header {
   background-color: #0e3b40;
   align-items: center; 
-  height: 110px;
+  height: 120px;
   padding: 15px 0px;
+  
+  font-family: 'Montserrat', sans-serif;
 
   background-image: url('https://i.pinimg.com/564x/dd/03/35/dd0335440224ed50a35045cd3aaf29b2.jpg');
   background-size: cover;
@@ -36,7 +42,7 @@ header .upper_container{
   justify-content: left;
   align-items: left;
   flex-direction: row;
-  margin-left: 650px;
+  margin-left: 600px;
 
 }
 
@@ -54,7 +60,7 @@ header .searchbar {
   display: flex;
   align-items: center; /* Align items vertically */
   margin-top: 50px;
-  margin-left: 300px;
+  margin-left: 250px;
 }
 
 header .searchbar input[type="text"] {
@@ -91,7 +97,7 @@ header .searchbar button:hover {
 }
 
 
-/* Create specifications for NavBar component */
+/* NAV */
 
 nav ul {
   /* list-style-type: none; */
@@ -116,25 +122,44 @@ nav ul li a:hover {
   background-color: #979ca8;
 }
 
-
-/* Create specifications for contact info form */
-
-.contact-form {
-  margin-top: 20px;
-  margin-left: 150px;
-  padding: 10px 20px;
-  max-width: 70%;
-  background-color: #b5b5b5;
-  color: #fff;
-
-  border: 1px solid #02172c;
-  border-radius: 20px;
-
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  align-items: center;
+nav ul li a.active {
+  color: #091529;
+  /* Set to bold */
+  font-weight: bold;
+  background-color: #979ca8;
 }
 
+/* Especifications for nav login and register */
+nav {
+  display: flex;
+  justify-content: space-between; /* Distribuye los elementos a los extremos */
+  align-items: center; /* Alinea verticalmente los elementos al centro */
+}
 
+.left {
+  display: flex;
+  justify-content: flex-start; /* Alinea los elementos a la izquierda */
+  list-style-type: none; /* Elimina viñetas de la lista */
+  padding: 0; /* Elimina el relleno predeterminado de la lista */
+}
+
+.right {
+  display: flex;
+  justify-content: flex-end; /* Alinea los elementos a la derecha */
+  list-style-type: none; /* Elimina viñetas de la lista */
+  padding: 0; /* Elimina el relleno predeterminado de la lista */
+}
+
+.logoutButton {
+  background-color: #5a0707;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;}
+
+/* FOOTER */
 
 footer {
   background-color: #02172c;
@@ -149,9 +174,11 @@ footer p {
   margin: 0;
 }
 
+/* BODY */
 
 body {
-  font-family: Arial, sans-serif;
+  
+  font-family: 'Montserrat', sans-serif;
   background-color: #273551;
   margin: 0;
   padding: 0;
@@ -159,13 +186,20 @@ body {
 
 .container {
 
-  max-width: 80%;
+  /* Ordenamos en columnas */
+  /* display: flex; */
+  max-width: 95%;
   margin: 20px auto;
   padding: 20px;
   background-color: #fff;
-  border-radius: 5px;
+  border-radius: 0.2px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
+
+.container :left {
+  background-color: black;
+}
+
 
 h1 {
   text-align: center;
@@ -174,51 +208,6 @@ h1 {
 .content {
   display: flex;
 }
-
-.film-details {
-  display: flex;
-  margin-top: 20px;
-  margin-left: 20px;
-  padding: 10px;
-}
-
-.film-list{
-  display: flex;
-  flex-direction: column;
-  gap: 20px; /* Espacio entre cada película */
-}
-
-.filters {
-  width: 500px; /* Ancho de la columna lateral */
-  padding: 20px;
-  background-color: #f4f4f4;
-}
-
-.filters h3 {
-  margin-top: 0;
-}
-
-.filters label {
-  display: block;
-  margin-bottom: 5px;
-  padding-top: 10px;
-  font-weight: bold;
-}
-
-.genre-dropdown {
-  position: 'absolute';
-  top: '100%';
-  left: 0;  
-  z-index: 1;
-  background-color: '#fff';
-  border: '1px solid #ccc';
-  border-radius: '4px';
-  box-shadow: '0 2px 4px rgba(0,0,0,0.1)';
-  padding: '5px';
-  max-height: '150px';
-  overflow-y: 'auto';
-  min-width: '150px' }
-
 
 img {
   width: 200px;
@@ -234,6 +223,9 @@ img {
 p {
   margin: 5px 0;
 }
+
+
+/* FORMS */
 
 .form-control {
   margin-bottom: 15px;
@@ -261,8 +253,12 @@ p {
   border-radius: 3px;
 }
 
+
+/* BUTTONS */
+
+
 button[type="submit"] {
-  background-color: #333;
+  background-color: #61708e;
   color: #fff;
   padding: 10px 20px;
   border: none;

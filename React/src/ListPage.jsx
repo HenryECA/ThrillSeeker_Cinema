@@ -1,43 +1,43 @@
 import { useEffect, useState } from 'react';
-import { render } from 'react-dom';
+import './css/films_list.css';
+import Film from './Films';
+import {RetrieveData} from './utils'
 
 
 const INITIAL_PAGE = 1;
 const FILMS_PER_PAGE = 6;
 
-function ListPage({filmList, currentPage, setCurrentPage}) {
-  return <div className="container">
+const INITIAL_FILTERS = {
+  title: '',
+  genres: [],
+  yearRange: [1900, 2024],
+  directors: [],
+  language: [],
+  duration: 0,
+  punctuation: 0
+};
 
-    <h2>Our recommendations</h2>
 
-      <div className="content">
+function Filters({filters, setFilters}) {
 
-        <div className="filters">
-            <Filters />
-        </div>
 
-        <div className="film-list">
-            <FilmList filmList={filmList} />
-            <PageFilter currentPage={currentPage} setCurrentPage={setCurrentPage} />
-        </div>
-    </div>
-  </div>
-}
-
-function Filters() {
-  const genres = ['Action', 'Adventure', 'Comedy', 'Drama', 'Fantasy', 'Horror', 'Mystery', 'Romance', 'Thriller'];
-  const categories = ['Films', 'Series', 'Documentaries', 'Short Films', 'Animations', 'TV Shows', 'Music Videos', 'Trailers', 'Video Games', 'Others' ];
+  const genres = ['Action', 'Adventure', 'Comedy', 'Drama', 'Fantasy', 'Horror', 'Mystery', 'Romance', 'Thriller', 'Crime', 'Sci-Fi'];
   const maxDuration = 240;
   const languages = ['Spanish', 'English', 'French', 'German', 'Italian', 'Portuguese', 'Russian', 'Chinese', 'Japanese', 'Korean', 'Arabic', 'Hindi', 'Others ']
-  const directors = ['Steven Spielberg', 'Quentin Tarantino', 'Martin Scorsese', 'Pedro Almodóvar', 'Woody Allen'];
-  // get directors from database
+  const directors = ['Frank Darabont', 'Francis Ford Coppola', 'Christopher Nolan', 'Quentin Tarantino', 'Peter Jackson', 'Robert Zemeckis', 'David Fincher', 'Martin Scorsese'];
+  const years = Array.from({ length: 74 }, (_, i) => 1950 + i);
+  const years_reverse = Array.from({ length: 74 }, (_, i) => 2024 - i);
 
+  const [selectedTitle, setSelectedTitle] = useState('');
   const [selectedGenres, setSelectedGenres] = useState([]);
-  const [yearRange, setYearRange] = useState([1900, 2022]);
+  const [yearRange, setYearRange] = useState([1950, 2024])
+
+
+
   const [selectedDirectors, setSelectedDirectors] = useState([]);
   const [selectedLanguages, setSelectedLanguages] = useState([]);
   const [selectedDuration, setSelectedDuration] = useState(0);
-  const [selectedPunctuation, setSelectedPunctuation] = useState(0);
+  const [selectedRating, setSelectedRating] = useState(0);
 
   const renderOptions = (list) => {
     return list.map((opt, index) => {
@@ -56,10 +56,20 @@ function Filters() {
     } else {
       setSelectedGenres(prevGenres => [...prevGenres, genre]);
     }
+
+    console.log('Selected genres:', selectedGenres);
   };
+
   const handleYearRangeChange = (e) => {
-    // Implementa la lógica para actualizar el rango de años
-  };
+    const { name, value } = e.target;
+    const newYear = parseInt(value);
+      
+    if (name === 'start') {
+      setYearRange([newYear, yearRange[1]]);
+    } else {
+      setYearRange([yearRange[0], newYear]);
+    }
+};
 
   const handleDurationChange = (e) => {
     const duration = parseInt(e.target.value);
@@ -86,21 +96,54 @@ function Filters() {
     });
   };
 
-  const handlePunctuationChange = (punctuation) => {
-    setSelectedPunctuation(punctuation);
+  const handleRatingChange = (rating) => {
+    setSelectedRating(rating);
+  };
+
+
+  // Función que aplica los filtros
+  const applyFilters = () => {
+
+    const newFilters = {
+      title: selectedTitle,
+      genres: selectedGenres,
+      yearRange: yearRange,
+      directors: selectedDirectors,
+      language: selectedLanguages,
+      duration: selectedDuration,
+      punctuation: selectedRating
+    };
+
+    setFilters(newFilters);
+
+    // Reiniciar los filtros después de aplicarlos
+    setSelectedTitle('');
+    setSelectedGenres([]);
+    setYearRange([1950, 2024]);
+    setSelectedDirectors([]);
+    setSelectedLanguages([]);
+    setSelectedDuration(0);
+    setSelectedRating(0);
+
+    // Mensaje de confirmación
+    alert('Filters applied successfully');
+
+    //Reinicia la apariencia de los filtros
+    
+    setIsOpen(false);
+
   };
 
 
   return (
-    <div>
-      <h3>Filters</h3>
+    <div >
+      <h2>Filters Selection</h2>
 
-      <label htmlFor="category">Category:</label>
-      <select name="category" id="category">
-      <option value="all">All</option>
-        {renderOptions(categories)}
-      </select>
+      {/* Title filter */}
+      <label htmlFor="title">Title:</label>
+      <input type="text" id="title" name="title" value={selectedTitle} onChange={(e) => setSelectedTitle(e.target.value)} />
 
+      {/* Genre filter */}
       <label htmlFor="genre">Genres:</label>
       <div style={{ position: 'relative', display: 'block' }}>
         <button onClick={toggleDropdown}>Selection</button>
@@ -124,37 +167,100 @@ function Filters() {
         )}
       </div>
 
+      {/* Director filter */}
       <label htmlFor="director">Director:</label>
-      <input type="text" id="director" name="director" list="director-list" onChange={handleDirectorChange} />
+      <input type="text" id="director" name="director" value={selectedDirectors} list="director-list" onChange={handleDirectorChange} />
       <datalist id="director-list">
         {renderOptions(directors)}
       </datalist>
 
+      {/* Language filter */}
       <label htmlFor="language">Language:</label>
-      <input type="text" id="language" name="language" list="language-list" onChange={handleLanguageChange} />
+      <input type="text" id="language" name="language" value={selectedLanguages} list="language-list" onChange={handleLanguageChange} />
       <datalist id="language-list">
         {renderOptions(languages)}
       </datalist>
 
-      <label htmlFor="duration">Max duration:</label>
-      <input type="range" id="duration" name="duration" min="0" max={maxDuration} step="10" value={selectedDuration} onChange={handleDurationChange} />
-      <span>{selectedDuration} minutes</span>
+      {/* Year range filter */}
+      <label htmlFor="year-range">Year Range:</label>
+      <select name="start" id="start-year" value={yearRange[0]} onChange={handleYearRangeChange}>
+        {renderOptions(years)}
+      </select>
+      <span> - </span>
+      {console.log('Year range:', yearRange)}
+      <select name="end" id="end-year" value={yearRange[1]} onChange={handleYearRangeChange}>
+        {renderOptions(years_reverse)}
+      </select>
 
+      {/* Duration filter */}
+      <div className='range-filters'>
+        <label htmlFor="duration">Max duration:</label>
+        <input type="range" id="duration" name="duration" min="0" max={maxDuration} step="10" value={selectedDuration} onChange={handleDurationChange} />
+        <span>{selectedDuration} minutes</span>
+      </div>
 
-      <label htmlFor="punctuation">Rating:</label>
+      {/* Rating filter */}
+      <label htmlFor="rating">Rating:</label>
         <div style={{ display: 'flex' }} className='star-filter'>
           {[1, 2, 3, 4, 5].map((value) => (
             <span
               key={value}
-              style={{ cursor: 'pointer', color: selectedPunctuation >= value ? 'gold' : 'gray', fontSize: '24px', padding: '0 5px'}}
-              onClick={() => handlePunctuationChange(value)}
+              style={{ cursor: 'pointer', color: selectedRating >= value ? 'gold' : 'gray', fontSize: '24px', padding: '0 5px'}}
+              onClick={() => handleRatingChange(value)}
             >
               ★
             </span>
           ))}
       </div>
+
+      <button className='apply-filters' onClick={() => applyFilters()}>Apply filters</button>
+
     </div>
   );
+}
+
+function ErrorMsg() {
+  return <div className='error_msg'>
+    
+    <h1 className='error_msg'> Ups! There are no movies that match your filters</h1>
+    <h3> Please, try again or click the Apply filters button to restart your search </h3>
+    
+    </div>
+}
+
+function ListPage({filmList, currentPage, setCurrentPage, filters, setFilters}) {
+
+  const [userData, errorData] = RetrieveData();
+
+  const isLogged = ({errorData}) => {
+      if (!errorData) {
+        return true}
+      else {
+        return false;}
+    }
+
+  // Llamamos a la función isLogged para comprobar si el usuario está logueado
+  const logged = isLogged({errorData});
+
+  return <div className="container">
+
+    {/* Dividimos la página en 2 partes, izquierda y derecha */}
+
+    <h1>Movie Guide and Selection</h1>
+    <h4>Don't forget to check out our filters area to find the perfect movie for you</h4>
+      <div className="content">
+
+        <div className="filters">
+            <Filters filters={filters} setFilters={setFilters}/>
+        </div>
+
+        <div className="film-list">
+            {filmList.length == 0 ? <ErrorMsg/> : <FilmList filmList={filmList} logged={logged} userData={userData}/>}
+            <PageFilter currentPage={currentPage} setCurrentPage={setCurrentPage} />
+        </div>
+    </div>
+  </div>
+
 }
 
 function PageFilter({currentPage, setCurrentPage}) {
@@ -173,93 +279,73 @@ function PageFilter({currentPage, setCurrentPage}) {
   </>
 }
 
-function FilmList({filmList}) {
+function FilmList({filmList, logged, userData}) {
   return (<div>
     {filmList.map(film =>
-        <Film key={film.id} film={film} />
+        <Film key={film.id} film={film} logged={logged} userData={userData} />
       )}
   </div>);
 }
 
-function Film({film}) {
-
-  const renderStars = () => {
-    const stars = [];
-    // Añadir una estrella por cada punto entero en la valoración
-    for (let i = 0; i < Math.floor(film.rating); i++) {
-      stars.push(<span key={i}>★</span>);
-    }
-    return stars;
-  };
-
-
-  return (
-    <div className="film-details" id="filmDetails">
-      <img src={film.thumbnail} alt="Thumbnail" id="thumbnail" />
-      <div className="info">
-
-        <h2> Película </h2>
-
-        {/* Introducir nombre de la película */}
-        {/* <h2>{film.name}</h2> */}
-
-        {/* Introducir director */}
-        {/* <p>
-          <strong>Director:</strong> <span>{film.director}</span>
-        </p> */}
-
-        {/* Introducir actores */}
-        {/* <p>
-          <strong>Actors:</strong> <span>{film.actors}</span>
-        </p> */}
-
-        {/* Introducir duración */}
-        {/* <p>
-          <strong>Duration:</strong> <span>{film.duration} minutos</span>
-        </p> */}
-
-        <p>{film.description}</p>
-        <p>
-          <strong>Precio:</strong><span>{film.price}€</span>
-        </p>
-        <p>
-          <strong>Stock:</strong> <span>{film.stock}</span>
-        </p>
-        <p>
-          {/* Introducir cuando tengamos la valoración media */}
-          <strong>Rating:</strong> <span>{renderStars()}</span>
-        </p>
-
-
-      </div>
-    </div>)
-}
 
 function App() {
+
   const [currentPage, setCurrentPage] = useState(INITIAL_PAGE);
   const [filmList, setfilmList] = useState([]);
+  const [filters, setFilters] = useState(INITIAL_FILTERS);
 
   useEffect(() => {
     let skip = (currentPage - INITIAL_PAGE) * FILMS_PER_PAGE;
+
+
+
     const fetchFilms = async () => {
       try {
-        const response = await fetch(`https://dummyjson.com/products?limit=${FILMS_PER_PAGE}&skip=${skip}`);
+
+        const filterParams = new URLSearchParams();
+
+        // Ajustes para añadir correctamente los filtros a la URL
+        if (filters.title) filterParams.append('title__icontains', filters.title);
+        if (filters.directors.length > 0) filterParams.append('director__icontains', filters.directors.join(','));
+        if (filters.genres.length > 0) filterParams.append('genre__icontains', filters.genres.join(','));
+        if (filters.yearRange[0]) filterParams.append('release_year__gte', filters.yearRange[0]);
+        if (filters.yearRange[1]) filterParams.append('release_year__lte', filters.yearRange[1]);
+        if (filters.duration) filterParams.append('length__lte', filters.duration);
+        if (filters.punctuation) filterParams.append('rt_score__gte', filters.punctuation);
+        if (filters.language.length > 0) filterParams.append('language__icontains', filters.language.join(','));
+
+
+        // Si no hay filtros, lanzamos la URL base. Devolvemos todas las películas
+        const baseUrl = `http://127.0.0.1:7000/?limit=${FILMS_PER_PAGE}&offset=${skip}`;
+        const url = filterParams.toString() ? `${baseUrl}&${filterParams.toString()}` : baseUrl; // Cambio: URL condicional
+
+        const response = await fetch(url);
+        
+        // Si hay error en la respuesta, lanzamos un error
         if (!response.ok) {
           throw new Error('No se pudo obtener la lista de productos');
         }
         const data = await response.json();
-        //console.log(data.products[0]);
-        setfilmList(data.products);
+
+        // Si no lo hay lanzamos la lista de productos
+        setfilmList(data.results);
+
       } catch (error) {
         console.error('Error al obtener los productos:', error);
       }
     };
 
-    fetchFilms();
-  }, [currentPage]);
+  
+  fetchFilms();
+  console.log('Films', filmList);
+
+  }, 
+  
+  [currentPage, filters]);
 
   return (
-      <ListPage filmList={filmList} currentPage={currentPage} setCurrentPage={setCurrentPage}/>
+      // Le pasamos a ListPage el estado y función de cambio de filters
+      <ListPage filmList={filmList} currentPage={currentPage} setCurrentPage={setCurrentPage} filters={filters} setFilters={setFilters}/>
   )
 }
 

@@ -9,12 +9,11 @@ const SearchBar = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Here you can implement your search functionality
     console.log('Searching for:', searchTerm);
   };
 
   return (
-    <div class='searchbar'>
+    <div className='searchbar'>
     <form onSubmit={handleSubmit}>
       <input
         type="text"
