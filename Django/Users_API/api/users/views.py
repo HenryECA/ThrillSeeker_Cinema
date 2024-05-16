@@ -14,6 +14,7 @@ from rest_framework.authtoken.models import Token
 from . import serializers
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
+from . import models
 
 class RegisterView(generics.CreateAPIView):
     # Ejercicio 13 y 15
@@ -81,20 +82,43 @@ class UpdateProfileView(generics.UpdateAPIView):
     serializer_class = serializers.UserSerializer
     
     def patch(self, request, *args, **kwargs):
-        print(request.headers)
         
-        token = Token.objects.get(key=request.COOKIES.get('session'))
+        try:
 
-        if token is None:
+            token = Token.objects.get(key=request.COOKIES.get('session'))
+        except ObjectDoesNotExist:
             return Response(status=status.HTTP_401_UNAUTHORIZED)
+
+        print(token)
         
         user = token.user
 
+        if user is None:
+            return Response(status=status.HTTP_401_UNAUTHORIZED)
 
-        serializer = self.get_serializer(user, data=request.data, partial=True)
-        serializer.is_valid(raise_exception=True)
-        serializer.save()
-        return Response(serializer.data)
+        print(kwargs)
+
+        username_param = kwargs.get('username')
+
+        print(username_param)
+        print(request.data)
+
+        if username_param is not None:
+            # Means that the user is trying to update another user. Check if the user is an admin
+            if user.admin is False:
+                return Response(status=status.HTTP_403_FORBIDDEN)
+            user_change = models.User.objects.get(username=username_param)
+            serializer = self.get_serializer(user_change, data=request.data, partial=True)
+            serializer.is_valid(raise_exception=True)
+            serializer.save()
+            return Response(serializer.data)
+        
+        else:
+
+            serializer = self.get_serializer(user, data=request.data, partial=True)
+            serializer.is_valid(raise_exception=True)
+            serializer.save()
+            return Response(serializer.data)
     
     def handle_exception(self, exc):
             
@@ -109,7 +133,10 @@ class DeleteProfileView(generics.DestroyAPIView):
 
     def get_object(self):
 
-        token = Token.objects.get(key=self.request.COOKIES.get('session'))
+        try: 
+            token = Token.objects.get(key=self.request.COOKIES.get('session'))
+        except ObjectDoesNotExist:
+            return Response(status=status.HTTP_401_UNAUTHORIZED)
 
         if token is None:
             return Response(status=status.HTTP_401_UNAUTHORIZED)
@@ -135,6 +162,16 @@ class DeleteProfileView(generics.DestroyAPIView):
 
 class LogoutView(generics.DestroyAPIView):
 
+    def delete(self, request, *args, **kwargs):
+        try:
+            print(request.headers)
+            token = Token.objects.get(key=request.COOKIES.get('session'))
+            print(token)
+            token.delete()
+            return Response(status=status.HTTP_204_NO_CONTENT)
+        except ObjectDoesNotExist:
+            return Response(status=status.HTTP_401_UNAUTHORIZED)
+
     def handle_exception(self, exc):
 
         if isinstance(exc, ObjectDoesNotExist):
@@ -142,13 +179,40 @@ class LogoutView(generics.DestroyAPIView):
         else:
             return super().handle_exception(exc)
     
-    def delete(self, request, *args, **kwargs):
+
+class UserListView(generics.ListCreateAPIView):
+    serializer_class = serializers.UserSerializer
+
+    def get_queryset(self):
+        
         try:
-            token = Token.objects.get(key=request.COOKIES.get('session'))
-            token.delete()
-            return Response(status=status.HTTP_204_NO_CONTENT)
+            token = Token.objects.get(key=self.request.COOKIES.get('session'))
         except ObjectDoesNotExist:
             return Response(status=status.HTTP_401_UNAUTHORIZED)
-    
-    pass
+
+        if token is None:
+            return Response(status=status.HTTP_401_UNAUTHORIZED)
+        
+        user = token.user
+
+        if user.admin is False or user is None:
+            return Response(status=status.HTTP_403_FORBIDDEN)
+        
+
+        # get all the users
+        return models.User.objects.all()
+
+    def post(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+    def handle_exception(self, exc):
+        if isinstance(exc, ObjectDoesNotExist):
+            return Response(status=status.HTTP_401_UNAUTHORIZED)
+        
+        print('Hello')
+        print(exc)
+        return super().handle_exception(exc)
 

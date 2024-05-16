@@ -20,5 +20,10 @@ class User(AbstractUser):
        
         if not self.username:
             self.username = self.email
+
+        if self.admin:
+            
+            self.is_superuser = True
+
         
         super().save(*args, **kwargs)

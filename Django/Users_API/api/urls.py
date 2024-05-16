@@ -30,7 +30,9 @@ urlpatterns = [
     path("api/users/login/", user_views.LoginView.as_view(), name="login"),
     path("api/users/logout/", user_views.LogoutView.as_view(), name="logout"),
     path("api/users/me/profile", user_views.ProfileView.as_view(), name="me"),
+    path("api/users/me/update/<str:username>/", user_views.UpdateProfileView.as_view(), name="other_update"),
     path("api/users/me/update/", user_views.UpdateProfileView.as_view(), name="me_update"),
     path("api/users/me/destroy/", user_views.DeleteProfileView.as_view(), name="me_destroy"),
-    path("api/users/logout/", user_views.LogoutView.as_view(), name="logout"),   
+    path("api/users/logout/", user_views.LogoutView.as_view(), name="logout"),
+    path("api/users/list/", user_views.UserListView.as_view(), name="userList"),   
 ]

@@ -9,7 +9,8 @@ Content-Type: application/json
     "email": "qp@a.com",
     "password": "abc12345",
     "phone": "1234567890",
-    "name": "Enrique"
+    "name": "Enrique",
+    "admin": true
 }
 
 
@@ -26,17 +27,17 @@ Content-Type: application/json
 
 ### Get user profile
 
-GET http://127.0.0.1:8000/api/users/me/ HTTP/1.1
+GET http://127.0.0.1:8000/api/users/me/profile HTTP/1.1
 Host: localhost:8080
-Cookie: session=8ab88991331ce2374ec9c2bc5e9e6c1494a02b8a
+Cookie: session=3d4b3d3bb52b5f4f890e777e3f352ec1a628af12
 
 # Fix error when cookie not found  -> 401 = not logged in
 
 ### Update user profile
 
-PUT http://127.0.0.1:8000/api/users/me/update/ HTTP/1.1
+PATCH http://127.0.0.1:8000/api/users/me/update/ HTTP/1.1
 Host: localhost:8080
-Cookie: session=8ab88991331ce2374ec9c2bc5e9e6c1494a02b8a
+Cookie: session=3d4b3d3bb52b5f4f890e777e3f352ec1a628af12
 Content-Type: application/json
 
 {
@@ -49,10 +50,32 @@ Content-Type: application/json
 
 DELETE http://127.0.0.1:8000/api/users/logout/ HTTP/1.1
 Host: localhost:8080
-Cookie: session=42c73e165bd80151daedb7ff9e98e0bf0d165159
+Cookie: session=3d4b3d3bb52b5f4f890e777e3f352ec1a628af12
 
 
 ### Delete user
 DELETE http://127.0.0.1:8000/api/users/me/destroy/ HTTP/1.1
 Host: localhost:8080
-Cookie: session=0832cc77f369d94fbbff04de8de7b81f469bf645
+Cookie: session=56b181f5ea725d0f66d47c597542b2e9b238dbff
+
+
+### Get all users
+GET http://127.0.0.1:8000/api/users/list/ HTTP/1.1
+Host: localhost:8000
+Cookie: session=ad
+
+
+### Patch user by admin and user
+
+PATCH http://127.0.0.1:8000/api/users/me/update/admin2234/ HTTP/1.1
+Host: localhost:8080
+Cookie: session=56b181f5ea725d0f66d47c597542b2e9b238dbff
+Content-Type: application/json
+
+{
+    "name": "nop",
+    "phone": "0987654321"
+}
+
+
+
