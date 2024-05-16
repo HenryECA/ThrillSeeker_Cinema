@@ -1,0 +1,61 @@
+### Obtener todas las peliculas
+
+GET http://127.0.0.1:8000/films/ HTTP/1.1
+Host: localhost:8080
+Content-Type: application/json
+
+### Crear un pelicula
+
+POST http://127.0.0.1:8000/films/create/ HTTP/1.1
+Host: localhost:8000
+Content-Type: application/json
+
+{
+  "title": "Avatar",
+  "director": "James Cameron",
+  "genre": "Sci-Fi",
+  "release_year": 2009,
+  "length": 162,
+  "producer": "James Cameron",
+  "summary": "A paraplegic Marine dispatched to the moon Pandora on a unique mission becomes torn between following his orders and protecting the world he feels is his home.",
+  "rt_score": 82,
+  "actors": ["Sam Worthington", "Zoe Saldana"],
+  "language": "English",
+  "img_link": "https://pics.filmaffinity.com/Avatar-208925608-large.jpg"
+}
+
+### Obtener una pelicula por su id
+
+GET http://127.0.0.1:8000/films/12/ HTTP/1.1
+Host: localhost:8080
+Content-Type: application/json
+
+
+### Actualizar datos de una pelicula - rt_score = 80
+
+PUT http://127.0.0.1:8000/films/1/update/ HTTP/1.1
+Host: localhost:8080
+Cookie: session=8ab88991331ce2374ec9c2bc5e9e6c1494a02b8a
+Content-Type: application/json
+
+{
+    "title": "The Shawshank Redemption",
+    "director": "Frank Darabont",
+    "genre": "Drama",
+    "release_year": 1994,
+    "length": 142,
+    "producer": "Niki Marvin",
+    "summary": "Two imprisoned men bond over a number of years, finding solace and eventual redemption through acts of common decency.",
+    "rt_score": 80,
+    "actors": [
+    "Tim Robbins",
+    "Morgan Freeman"
+    ],
+    "language": "English",
+    "img_link": "https://m.media-amazon.com/images/M/MV5BNDE3ODcxYzMtY2YzZC00NmNlLWJiNDMtZDViZWM2MzIxZDYwXkEyXkFqcGdeQXVyNjAwNDUxODI@._V1_.jpg"
+}
+
+
+### Eliminar la película id 1
+DELETE http://127.0.0.1:8000/films/10/delete/ HTTP/1.1
+Host: localhost:8080
