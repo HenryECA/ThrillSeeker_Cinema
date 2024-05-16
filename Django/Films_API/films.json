@@ -1,0 +1,189 @@
+[
+    {
+        "model": "films.film",
+        "pk": 1,
+        "fields": {
+            "title": "The Shawshank Redemption",
+            "director": "Frank Darabont",
+            "genre": "Drama",
+            "release_year": 1994,
+            "length": 142,
+            "producer": "Niki Marvin",
+            "summary": "Two imprisoned men bond over a number of years, finding solace and eventual redemption through acts of common decency.",
+            "rt_score": 5,
+            "actors": ["Tim Robbins", "Morgan Freeman"],
+            "language": "English",
+            "img_link": "https://m.media-amazon.com/images/M/MV5BNDE3ODcxYzMtY2YzZC00NmNlLWJiNDMtZDViZWM2MzIxZDYwXkEyXkFqcGdeQXVyNjAwNDUxODI@._V1_.jpg"
+        }
+    },
+    {
+        "model": "films.film",
+        "pk": 2,
+        "fields": {
+            "title": "The Godfather",
+            "director": "Francis Ford Coppola",
+            "genre": "Crime",
+            "release_year": 1972,
+            "length": 175,
+            "producer": "Albert S. Ruddy",
+            "summary": "The aging patriarch of an organized crime dynasty transfers control of his clandestine empire to his reluctant son.",
+            "rt_score": 4,
+            "actors": ["Marlon Brando", "Al Pacino"],
+            "language": "English",
+            "img_link": "https://m.media-amazon.com/images/M/MV5BM2MyNjYxNmUtYTAwNi00MTYxLWJmNWYtYzZlODY3ZTk3OTFlXkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_FMjpg_UX1000_.jpg"
+        }
+    },
+    {
+        "model": "films.film",
+        "pk": 3,
+        "fields": {
+            "title": "The Dark Knight",
+            "director": "Christopher Nolan",
+            "genre": "Action",
+            "release_year": 2008,
+            "length": 152,
+            "producer": "Emma Thomas",
+            "summary": "When the menace known as the Joker emerges from his mysterious past, he wreaks havoc and chaos on the people of Gotham.",
+            "rt_score": 4,
+            "actors": ["Christian Bale", "Heath Ledger"],
+            "language": "English",
+            "img_link": "https://m.media-amazon.com/images/M/MV5BMTMxNTMwODM0NF5BMl5BanBnXkFtZTcwODAyMTk2Mw@@._V1_.jpg"
+        }
+    },
+    {
+        "model": "films.film",
+        "pk": 4,
+        "fields": {
+            "title": "Pulp Fiction",
+            "director": "Quentin Tarantino",
+            "genre": "Crime",
+            "release_year": 1994,
+            "length": 154,
+            "producer": "Lawrence Bender",
+            "summary": "The lives of two mob hitmen, a boxer, a gangster's wife, and a pair of diner bandits intertwine in four tales of violence and redemption.",
+            "rt_score": 3,
+            "actors": ["John Travolta", "Uma Thurman"],
+            "language": "English",
+            "img_link": "https://pics.filmaffinity.com/Pulp_Fiction-210382116-mmed.jpg"
+        }
+    },
+    {
+        "model": "films.film",
+        "pk": 5,
+        "fields": {
+            "title": "The Lord of the Rings: The Return of the King",
+            "director": "Peter Jackson",
+            "genre": "Fantasy",
+            "release_year": 2003,
+            "length": 201,
+            "producer": "Barrie M. Osborne",
+            "summary": "Gandalf and Aragorn lead the World of Men against Sauron's army to draw his gaze from Frodo and Sam as they approach Mount Doom with the One Ring.",
+            "rt_score": 4,
+            "actors": ["Elijah Wood", "Viggo Mortensen"],
+            "language": "English",
+            "img_link": "https://m.media-amazon.com/images/M/MV5BNzA5ZDNlZWMtM2NhNS00NDJjLTk4NDItYTRmY2EwMWZlMTY3XkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_.jpg"
+        }
+    },
+    {
+        "model": "films.film",
+        "pk": 6,
+        "fields": {
+            "title": "Forrest Gump",
+            "director": "Robert Zemeckis",
+            "genre": "Drama",
+            "release_year": 1994,
+            "length": 142,
+            "producer": "Wendy Finerman",
+            "summary": "The presidencies of Kennedy and Johnson, the Vietnam War, the Watergate scandal and other historical events unfold from the perspective of an Alabama man with an IQ of 75.",
+            "rt_score": 5,
+            "actors": ["Tom Hanks", "Robin Wright"],
+            "language": "English",
+            "img_link": "https://pics.filmaffinity.com/Forrest_Gump-212765827-large.jpg"
+        }
+    },
+    {
+        "model": "films.film",
+        "pk": 7,
+        "fields": {
+            "title": "Inception",
+            "director": "Christopher Nolan",
+            "genre": "Action",
+            "release_year": 2010,
+            "length": 148,
+            "producer": "Emma Thomas",
+            "summary": "A thief who steals corporate secrets through the use of dream-sharing technology is given the inverse task of planting an idea into the mind of a CEO.",
+            "rt_score": 2,
+            "actors": ["Leonardo DiCaprio", "Joseph Gordon-Levitt"],
+            "language": "English",
+            "img_link": "https://m.media-amazon.com/images/M/MV5BMjAxMzY3NjcxNF5BMl5BanBnXkFtZTcwNTI5OTM0Mw@@._V1_.jpg"
+        }
+    },
+    {
+        "model": "films.film",
+        "pk": 8,
+        "fields": {
+            "title": "Fight Club",
+            "director": "David Fincher",
+            "genre": "Drama",
+            "release_year": 1999,
+            "length": 139,
+            "producer": "Art Linson",
+            "summary": "An insomniac office worker and a devil-may-care soap maker form an underground fight club that evolves into something much, much more.",
+            "rt_score": 4,
+            "actors": ["Brad Pitt", "Edward Norton"],
+            "language": "English",
+            "img_link": "https://m.media-amazon.com/images/I/71IWKA9Rn4L._AC_UF894,1000_QL80_.jpg"
+        }
+    },
+    {
+        "model": "films.film",
+        "pk": 9,
+        "fields": {
+            "title": "The Matrix",
+            "director": "Lana Wachowski, Lilly Wachowski",
+            "genre": "Sci-Fi",
+            "release_year": 1999,
+            "length": 136,
+            "producer": "Joel Silver",
+            "summary": "A computer hacker learns from mysterious rebels about the true nature of his reality and his role in the war against its controllers.",
+            "rt_score": 5,
+            "actors": ["Keanu Reeves", "Laurence Fishburne"],
+            "language": "English",
+            "img_link": "https://m.media-amazon.com/images/M/MV5BNzQzOTk3OTAtNDQ0Zi00ZTVkLWI0MTEtMDllZjNkYzNjNTc4L2ltYWdlXkEyXkFqcGdeQXVyNjU0OTQ0OTY@._V1_.jpg"
+        }
+    },
+    {
+        "model": "films.film",
+        "pk": 10,
+        "fields": {
+            "title": "Goodfellas",
+            "director": "Martin Scorsese",
+            "genre": "Crime",
+            "release_year": 1990,
+            "length": 146,
+            "producer": "Irwin Winkler",
+            "summary": "The story of Henry Hill and his life in the mob, covering his relationship with his wife Karen Hill and his mob partners Jimmy Conway and Tommy DeVito in the Italian-American crime syndicate.",
+            "rt_score": 4,
+            "actors": ["Robert De Niro", "Ray Liotta"],
+            "language": "English",
+            "img_link": "https://pics.filmaffinity.com/Uno_de_los_nuestros-343032101-large.jpg"
+        }
+    },
+    {
+        "model": "films.film",
+        "pk": 11,
+        "fields": {
+            "title": "Interstellar",
+            "director": "Christopher Nolan",
+            "genre": "Sci-Fi",
+            "release_year": 2014,
+            "length": 169,
+            "producer": "Emma Thomas",
+            "summary": "A team of explorers travel through a wormhole in space in an attempt to ensure humanity's survival.",
+            "rt_score": 2,
+            "actors": ["Matthew McConaughey", "Anne Hathaway"],
+            "language": "English",
+            "img_link": "https://example.com/interstellar.jpg"
+        }
+    }
+]
