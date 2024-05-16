@@ -17,12 +17,19 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from drf_spectacular.views import SpectacularAPIView, SpectacularRedocView
-from api.films.views import FilmListView
+import api.films.views as films_views
 
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     path('api/schema/', SpectacularAPIView.as_view(), name='schema'),
     path('api/schema/redoc/', SpectacularRedocView.as_view(url_name='schema'), name='redoc'),
-    path('', FilmListView.as_view(), name='film-list'),
+    path('', films_views.FilmListView.as_view(), name='film-list'),
+    path('film/userReview/', films_views.FilmUserReviews.as_view(), name='film-user-review'), 
+    path('films/', films_views.FilmListView.as_view(), name='film-list'),
+    path('films/create/', films_views.FilmCreateView.as_view(), name='film-create'),
+    path('films/<int:pk>/', films_views.FilmDetailView.as_view(), name='film-detail'),
+    path('films/<int:pk>/update/', films_views.FilmUpdateView.as_view(), name='film-update'),
+    path('films/<int:pk>/delete/', films_views.FilmDeleteView.as_view(), name='film-delete'),
     ]
+    

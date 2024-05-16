@@ -13,6 +13,7 @@ class Film(models.Model):
     actors = models.JSONField()  # Almacenar actores como una lista JSON
     language = models.CharField(max_length=256, default='Unknown')
     img_link = models.URLField()
+    user_reviews = models.JSONField(default=dict)
 
     def __str__(self):
         return self.title
