@@ -12,12 +12,13 @@ from .serializers import FilmSerializer
 from rest_framework.authtoken.models import Token
 from rest_framework.pagination import LimitOffsetPagination
 from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework.filters import OrderingFilter
 
 class FilmListView(generics.ListAPIView):
     queryset = Film.objects.all()
     serializer_class = FilmSerializer
     pagination_class = LimitOffsetPagination
-    filter_backends = [DjangoFilterBackend]
+    filter_backends = [DjangoFilterBackend, OrderingFilter]
     filterset_fields = {
         'title': ['icontains'],
         'director': ['icontains'],
@@ -27,6 +28,31 @@ class FilmListView(generics.ListAPIView):
         'rt_score': ['gte'],
         'language': ['icontains']
     }
+    ordering_fields = ['title', 'release_year', 'length', 'rt_score']
+    ordering = ['id']
+
+    def get_queryset(self):
+        queryset = Film.objects.all()
+        print(f"Query params: {self.request.query_params}")  # Debug print statement to check the query parameters
+        ordering = self.request.query_params.get('ordering')
+        
+        if ordering:
+            valid_ordering_fields = [field for field in self.ordering_fields]
+            # Handle ordering for ascending and descending order dynamically
+            if ordering.lstrip('-') in valid_ordering_fields:
+                queryset = queryset.order_by(ordering)
+        
+        print(f"Ordering by: {ordering}")  # Debug print statement to check the ordering parameter
+        return queryset
+    
+    def list(self, request, *args, **kwargs):
+        # Check if the 'limit' parameter is present in the request
+        if 'limit' not in request.query_params:
+            # Disable pagination if 'limit' parameter is not specified
+            self.pagination_class = None
+        
+        # Call the default 'list' method to retrieve and return the response
+        return super().list(request, *args, **kwargs)
 
 
 class FilmUserReviews(generics.RetrieveUpdateAPIView):
@@ -73,20 +99,22 @@ class FilmCreateView(generics.CreateAPIView):
             return super().handle_exception(exc)
 
 
-class FilmListView(generics.ListAPIView):
-    queryset = Film.objects.all()
-    serializer_class = FilmSerializer
-    pagination_class = LimitOffsetPagination
-    filter_backends = [DjangoFilterBackend]
-    filterset_fields = {
-        'title': ['icontains'],
-        'director': ['icontains'],
-        'genre': ['icontains'],
-        'release_year': ['gte', 'lte'],
-        'length': ['lte'],
-        'rt_score': ['gte'],
-        'language': ['icontains']
-    }
+# class FilmListView(generics.ListAPIView):
+#     queryset = Film.objects.all()
+#     serializer_class = FilmSerializer
+#     pagination_class = LimitOffsetPagination
+#     filter_backends = [DjangoFilterBackend]
+#     filterset_fields = {
+#         'title': ['icontains'],
+#         'director': ['icontains'],
+#         'genre': ['icontains'],
+#         'release_year': ['gte', 'lte'],
+#         'length': ['lte'],
+#         'rt_score': ['gte'],
+#         'language': ['icontains']
+#     }
+
+
 
 
 class FilmDetailView(generics.RetrieveAPIView):

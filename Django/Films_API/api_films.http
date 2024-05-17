@@ -35,7 +35,7 @@ Content-Type: application/json
   "length": 162,
   "producer": "James Cameron",
   "summary": "A paraplegic Marine dispatched to the moon Pandora on a unique mission becomes torn between following his orders and protecting the world he feels is his home.",
-  "rt_score": 82,
+  "rt_score": 2,
   "actors": ["Sam Worthington", "Zoe Saldana"],
   "language": "English",
   "img_link": "https://pics.filmaffinity.com/Avatar-208925608-large.jpg"
@@ -63,7 +63,7 @@ Content-Type: application/json
     "length": 142,
     "producer": "Niki Marvin",
     "summary": "Two imprisoned men bond over a number of years, finding solace and eventual redemption through acts of common decency.",
-    "rt_score": 80,
+    "rt_score": 2,
     "actors": [
     "Tim Robbins",
     "Morgan Freeman"
