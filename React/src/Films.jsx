@@ -96,24 +96,24 @@ export default function Film({film, logged, userData}) {
           </p>
 
           <p>
-            <strong>Género:</strong> <span>{film.genre}</span>
+            <strong>Genre:</strong> <span>{film.genre}</span>
           </p>
 
           <p>
-            <strong>Idioma:</strong> <span>{film.language}</span>
+            <strong>Language:</strong> <span>{film.language}</span>
           </p>
 
           <p>
-            <strong>Estreno:</strong> <span>{film.release_year}</span>
+            <strong>Release year:</strong> <span>{film.release_year}</span>
           </p>
   
           <p>
-            <strong>Descripción: </strong><span>{film.summary}</span>
+            <strong>Summary: </strong><span>{film.summary}</span>
           </p>
 
           <p>
             {/* Introducir cuando tengamos la valoración media */}
-            <strong>Avg. Rating:</strong> <span>{renderStars()}</span>
+            <strong>Avg. Rating:</strong> <span>{logged ? renderStars(): "Login / Register to see rating!"}</span>
           </p>
 
           {/* Botón de rating solo para usuarios */}

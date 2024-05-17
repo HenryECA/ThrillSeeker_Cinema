@@ -28,7 +28,7 @@ function SideComponent() {
 
     {/* Integrante 3 */}
     <div className="integrante">
-      <img src="./assets/joaquin.jpg" alt="Integrante 3" />
+      <img src="../images/joaquin.jpeg" alt="Integrante 3" />
       <div className="info">
         <h3>Joaquín Mir Macías</h3>
         <p><b>Contact:</b> thrillseekersJMM@gmail.com  </p>

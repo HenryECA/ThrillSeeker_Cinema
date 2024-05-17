@@ -3,3 +3,222 @@
     justify-content: center;
     margin-top: 20px;
 }
+
+.userDatabase-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.upload-button {
+    padding: 15px;
+    border: none;
+    background-color: #147e3d;
+    color: white;
+    cursor: pointer;
+    float: right; /* Move the button to the right */
+}
+
+.cancel2-button {
+    padding: 15px;
+    border: none;
+    background-color: #f44336;
+    color: white;
+    cursor: pointer;
+    float: right; /* Move the button to the right */
+}
+
+.upload-button:hover,
+.submit-button:hover {
+    background-color: #0d5f2d;
+}
+
+.cancel-button:hover {
+    background-color: #c62828;
+}
+
+.film-item {
+    display: flex;
+    flex-direction: column; /* Arrange children vertically */
+}
+
+.film-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.film-buttons {
+    display: flex;
+    align-items: center;
+}
+
+
+.delete-button {
+    margin-left: 10px;
+    padding: 10px;
+    border: none;
+    background-color: #f44336;
+    color: white;
+    cursor: pointer;
+}
+
+.film-item {
+    display: flex;
+    flex-direction: column; /* Arrange children vertically */
+    border-bottom: 1px solid #ccc; /* Add a thin line between movies */
+    padding-bottom: 10px; /* Add some spacing between movies */
+}
+
+.film-item:last-child {
+    border-bottom: none;
+}
+
+.search-container {
+    display: flex;
+    align-items: center; /* Align items vertically */
+    margin-bottom: 10px; /* Add some spacing between the search bar and the film list */
+}
+
+.search-container p {
+    margin-right: 10px; /* Add some spacing between the text and the search bar */
+}
+
+.adminSearchBar {
+  max-width: 60%;
+  height: 3px;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 0.2px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+
+/* Table */
+table {
+    width: 60%; /* Set table width to fill container */
+    border-collapse: collapse; /* Remove default cell spacing */
+}
+th {
+    background-color: #052749; /* Bluish color for the header */
+    color: white; /* White text color for better contrast */
+    padding: 10px; /* Add padding for better appearance */
+}
+
+/* Edit column */
+td.editBlock {
+    background-color: #e9ecef; /* Grayish color for the edit column */
+    justify-content: center;
+}
+
+/* Table inputs */
+table input[type="text"],
+table input[type="checkbox"] {
+    width: calc(100% - 16px); /* Adjust width of text inputs to fill the cell minus padding and border */
+    height: 100%; /* Set the height of all inputs to match the cell */
+    box-sizing: border-box; /* Ensure padding and border are included in the width */
+    /* Additional styles as needed */
+}
+
+/* Table cells */
+td {
+    padding: 10px; /* Add padding for better appearance */
+    padding-left: 20px; /* Add margin to separate cells */
+    padding-right: 20px; /* Add margin to separate cells */
+}
+
+/* Optional: Increase the height of checkboxes for better visibility */
+table input[type="checkbox"] {
+    height: 16px; /* Adjust height as needed */
+    width: 16px; /* Adjust width as needed */
+
+}
+
+
+/* Modal*/
+
+.modal {
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4); /* Black background with transparency */
+}
+
+
+/* Modal content */
+.modal-content {
+    background-color: #f9f9f9; /* Light grey background */
+    margin: 10% auto; /* Center modal vertically and horizontally */
+    padding: 20px;
+    border: 1px solid #ccc; /* Light grey border */
+    width: 80%;
+    max-width: 500px; /* Maximum width of modal */
+    border-radius: 5px;
+}
+
+/* Close button */
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Form fields */
+.modal-content div {
+    margin-bottom: 15px; /* Add more space between form fields */
+}
+
+.modal-content label {
+    display: block; /* Make labels display block for vertical alignment */
+    margin-bottom: 5px; /* Add space below labels */
+    font-weight: bold; /* Bold labels */
+}
+
+.modal-content input[type="text"],
+.modal-content textarea {
+    width: 100%; /* Full width input fields */
+    padding: 10px; /* Increase padding */
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+    margin-bottom: 10px; /* Add space below input fields */
+}
+
+.modal-content textarea {
+    height: 100px; /* Set height for textarea */
+}
+
+/* Button container */
+.button-container {
+    text-align: right; /* Align buttons to the right */
+}
+
+.button-container button {
+    background-color: #007bff; /* Blue background color for buttons */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 20px;
+    cursor: pointer;
+    margin-left: 10px; /* Add space between buttons */
+}
+
+.button-container button:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+}
+
+
+

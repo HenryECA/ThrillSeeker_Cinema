@@ -32,7 +32,7 @@ export default function Header() {
           console.error('Error:', response);
         }
 
-        window.location.reload();
+        window.location.href = "/"
       })
       .catch((error) => {
         console.error('Error:', error);
@@ -44,8 +44,8 @@ export default function Header() {
   return (
     <header>
 
-      <div class="upper_container">
-        <div class="text_container">
+      <div className="upper_container">
+        <div className="text_container">
           <h1>ThrillSeeker Cinema</h1>
           <h2>Lights, camera, action!</h2>
         </div>

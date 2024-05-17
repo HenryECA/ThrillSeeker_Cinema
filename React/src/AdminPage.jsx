@@ -1,4 +1,4 @@
-import { RetrieveData, RetrieveFilmList, PatchAdminUserData, UpdateFilmInfo, DeleteFilm } from "./utils";
+import { RetrieveData, RetrieveFilmList, PatchAdminUserData, UpdateFilmInfo, DeleteFilm, CreateFilm } from "./utils";
 
 import { useState, useEffect } from 'react';
 
@@ -107,45 +107,51 @@ function UserDatabase() {
     };
 
     const filteredUserList = userList.filter(user =>
-        user.username.toLowerCase().includes(searchQuery.toLowerCase())
+        user.username.includes(searchQuery)
     );
 
     return (
         <div>
             <h2>User Database</h2>
-            <p>Search by Username: </p>
-            <input
-                type="text"
-                placeholder="Search by username"
-                value={searchQuery}
-                onChange={handleSearchChange}
-            />
-            <table>
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Username</th>
-                        <th>Email</th>
-                        <th>Admin</th>
-                        <th>Edit</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {filteredUserList.map((user, index) => (
-                        <tr key={index}>
-                            <td>{user.editing ? <input type="text" value={user.username} onChange={(event) => handleInputChange(event, index, 'username')} /> : user.username}</td>
-                            <td>{user.editing ? <input type="text" value={user.email} onChange={(event) => handleInputChange(event, index, 'email')} /> : user.email}</td>
-                            <td>{user.editing ? <input type="text" value={user.name} onChange={(event) => handleInputChange(event, index, 'name')} /> : user.name}</td>
-                            <td>
-                                <input type="checkbox" disabled={!user.editing} checked={user.admin} onChange={() => handleInputChange({ target: { value: !user.admin } }, index, 'admin')} />
-                            </td>
-                            <td className="editBlock">
-                                <input type="checkbox" checked={user.editing} onChange={() => handleEditToggle(index)} />
-                            </td>
+            <div className="userDatabase-container">
+                <div className="search-container">
+
+                    <p>Search by Username: </p>
+                    <input className="adminSearchBar"
+                    type="text"
+                    placeholder="Search by username"
+                    value={searchQuery}
+                    onChange={handleSearchChange}
+                />
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Edit</th>
+                            <th>Username</th>
+                            <th>Email</th>
+                            <th>Name</th>
+                            <th>Admin</th>
                         </tr>
-                    ))}
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        {filteredUserList.map((user, index) => (
+                            <tr key={index}>
+                                <td className="editBlock">
+                                    <input type="checkbox" checked={user.editing} onChange={() => handleEditToggle(index)} />
+                                </td>
+                                <td>{user.editing ? <input type="text" value={user.username} onChange={(event) => handleInputChange(event, index, 'username')} /> : user.username}</td>
+                                <td>{user.editing ? <input type="text" value={user.email} onChange={(event) => handleInputChange(event, index, 'email')} /> : user.email}</td>
+                                <td>{user.editing ? <input type="text" value={user.name} onChange={(event) => handleInputChange(event, index, 'name')} /> : user.name}</td>
+                                <td>
+                                    <input type="checkbox" disabled={!user.editing} checked={user.admin} onChange={() => handleInputChange({ target: { value: !user.admin } }, index, 'admin')} />
+                                </td>
+                                
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            </div>
             {message && <p>{message}</p>}
         </div>
     );
@@ -155,12 +161,13 @@ function UserDatabase() {
 function FilmDatabase() {
     const [filmList, setFilmList] = useState([]);
     const [searchTerm, setSearchTerm] = useState('');
+    const [showModal, setShowModal] = useState(false);
 
     useEffect(() => {
         const fetchData = async () => {
             try {
                 const data = await RetrieveFilmList();
-                setFilmList(data.results);
+                setFilmList(data);
             } catch (error) {
                 console.error('Error fetching film list:', error);
             }
@@ -198,22 +205,37 @@ function FilmDatabase() {
         if (error) {
             console.error('Error deleting film:', error);
         }}
+    
+    const handleUploadFilm = () => {
+        setShowModal(true);
+    };
 
+    // Define function to close modal
+    const handleCloseModal = () => {
+        setShowModal(false);
+    };
         
 
     return (
         <div>
             <h2>Film Database</h2>
-            <input
-                type="text"
-                placeholder="Search by movie title"
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-            />
+            {!showModal && (
+            <div className="search-container">
+                <p>Search by Movie Title: </p>
+                <input className="adminSearchBar"
+                    type="text"
+                    placeholder="Search by movie title"
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                />
+                <button className="upload-button" onClick={handleUploadFilm}>Upload Film</button>
+            </div>
+            )}
+            {showModal && <UploadFilmModal onClose={handleCloseModal} />}
             <ul>
-                {filteredFilms.map((film, index) => (
+                {!showModal ?filteredFilms.map((film, index) => (
                     <ShowFilmInfo key={index} filmInfo={film} index={index} onDelete={handleDeleteFilm} setFilmList={handleFilmListUpdate}/>
-                ))}
+                )): null}
             </ul>
         </div>
     );
@@ -293,11 +315,13 @@ function ShowFilmInfo({ filmInfo, index, onDelete, setFilmList }) {
     return (
         <li className="film-item">
             <div className="film-title">
-                {filmInfo.title} ({filmInfo.release_year})
-                <button className="toggle-details-button" onClick={toggleDetails}>
-                    {showDetails ? 'Hide Details' : 'Show Details'}
-                </button>
-                <button className="delete-button" onClick={() => onDelete(filmInfo.id)}>Delete</button>
+                <span>{filmInfo.title} ({filmInfo.release_year})</span>
+                <div className="film-buttons">
+                    <button className="toggle-details-button" onClick={toggleDetails}>
+                        {showDetails ? 'Hide Details' : 'Show Details'}
+                    </button>
+                    <button className="delete-button" onClick={() => onDelete(filmInfo.id)}>Delete</button>
+                </div>
             </div>
             {showDetails && (
                 <div className="film-info">
@@ -315,5 +339,113 @@ function ShowFilmInfo({ filmInfo, index, onDelete, setFilmList }) {
     );
 }
 
+const UploadFilmModal = ({ onClose }) => {
+    // Define state variables for form fields
+    const [title, setTitle] = useState('');
+    const [director, setDirector] = useState('');
+    const [actors, setActors] = useState('');
+    const [length, setLength] = useState('');
+    const [genre, setGenre] = useState('');
+    const [language, setLanguage] = useState('');
+    const [releaseYear, setReleaseYear] = useState('');
+    const [summary, setSummary] = useState('');
+    const [image, setImage] = useState("");
+    const [producer, setProducer] = useState("");
+    const [rating, setRating] = useState("");
 
+    // Define a function to handle form submission
+    const handleSubmit = () => {
+        // Implement logic to handle form submission (e.g., API request to upload film)
+        // create a json object to send to the backend
+        const filmData = {
+            title,
+            director,
+            actors: actors.split(',').map(actor => actor.trim()),
+            length,
+            genre,
+            language,
+            release_year: releaseYear,
+            summary,
+            img_link: image,
+            producer,
+            rt_score: rating
+        };
+
+        // Implement logic to upload film to the backend or wherever you store the data
+        console.log('Uploaded film:', filmData);
+        CreateFilm(filmData);
+
+        // Reset form fields
+        setTitle('');
+        setDirector('');
+        setActors('');
+        setLength('');
+        setGenre('');
+        setLanguage('');
+        setReleaseYear('');
+        setSummary('');
+        setImage('');
+        setProducer('');
+        setRating('');
+        
+    };
+
+    return (
+        <div className="modal">
+            <div className="modal-content">
+                <span className="close" onClick={onClose}>&times;</span>
+                <h3>Upload Film</h3>
+                {/* Form fields */}
+                <div>
+                    <label>Title:</label>
+                    <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} />
+                </div>
+                <div>
+                    <label>Director:</label>
+                    <input type="text" value={director} onChange={(e) => setDirector(e.target.value)} />
+                </div>
+                <div>
+                    <label>Actors:</label>
+                    <input type="text" value={actors} onChange={(e) => setActors(e.target.value)} />
+                </div>
+                <div>
+                    <label>Length:</label>
+                    <input type="text" value={length} onChange={(e) => setLength(e.target.value)} />
+                </div>
+                <div>
+                    <label>Genre:</label>
+                    <input type="text" value={genre} onChange={(e) => setGenre(e.target.value)} />
+                </div>
+                <div>
+                    <label>Language:</label>
+                    <input type="text" value={language} onChange={(e) => setLanguage(e.target.value)} />
+                </div>
+                <div>
+                    <label>Release Year:</label>
+                    <input type="text" value={releaseYear} onChange={(e) => setReleaseYear(e.target.value)} />
+                </div>
+                <div>
+                    <label>Producer:</label>
+                    <input type="text" value={producer} onChange={(e) => setProducer(e.target.value)} />
+                </div>
+                <div>
+                    <label>Rating:</label>
+                    <input type="text" value={rating} onChange={(e) => setRating(e.target.value)} />
+                </div>
+                <div>
+                    <label>Summary:</label>
+                    <textarea value={summary} onChange={(e) => setSummary(e.target.value)} />
+                </div>
+                <div>
+                    <label>Image Link:</label>
+                    <input type="text" value={image} onChange={(e) => setImage(e.target.value)} />
+                </div>
+                <div className="button-container">
+                    <button className="submit-button" onClick={handleSubmit}>Submit</button>
+                    <button className="cancel2-button" onClick={onClose}>Cancel</button> {/* Cancel button */}
+                </div>
+            </div>
+        </div>
+    );
+};
 

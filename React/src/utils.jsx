@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import Cookies from 'js-cookie';
 
 export function RetrieveData() {
     const [userData, setUserData] = useState({});
@@ -243,7 +242,8 @@ export async function RetrieveFilmList(){
         }
 
         const filmData = await response.json();
-
+        
+        console.log('FilmData:', filmData);
         return filmData;
 
     } catch (error) {
@@ -312,4 +312,32 @@ export async function DeleteFilm(index){
     }
 
     return code, error;
+}
+
+
+export async function CreateFilm(film){
+    
+    const path = "http://127.0.0.1:7000/films/create/"
+
+    try {
+        const response = await fetch(path, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(film),
+        });
+
+        if (!response.ok) {
+            throw new Error('Failed to create film');
+        }
+
+        const filmData = await response.json();
+
+        return filmData;
+
+    } catch (error) {
+        console.error('Error:', error);
+        return null; // or throw error if desired
+    }
 }
